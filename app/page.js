@@ -1,10 +1,11 @@
 import Hero from "@/sections/Hero";
+import SocialProof from "@/sections/SocialProof";
 
 export default function HomePage() {
   return (
     <>
       <Hero />
-      <section aria-hidden="true" className="min-h-screen bg-white" />
+      <SocialProof />
     </>
   );
 }
