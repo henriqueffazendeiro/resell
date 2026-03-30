@@ -2,8 +2,10 @@ import PromoBadge from "@/components/PromoBadge";
 
 export default function Hero() {
   return (
-    <section className="flex min-h-screen min-h-svh items-center justify-center bg-white px-6">
-      <div className="mx-auto flex w-full max-w-2xl flex-col items-center justify-center gap-6 text-center">
+    <section className="relative flex min-h-screen min-h-svh items-center justify-center overflow-hidden bg-white px-6">
+      <div className="pointer-events-none absolute inset-x-0 bottom-[-18%] h-[42vh] bg-[radial-gradient(ellipse_at_center,rgba(2,119,131,0.22)_0%,rgba(2,119,131,0.12)_32%,rgba(2,119,131,0.05)_52%,rgba(255,255,255,0)_74%)] blur-3xl" />
+
+      <div className="relative z-10 mx-auto flex w-full max-w-2xl flex-col items-center justify-center gap-6 text-center">
         <PromoBadge />
 
         <h1 className="title-reveal flex flex-col items-center justify-center text-[57px] font-bold leading-[1.15] tracking-tight text-slate-900">
