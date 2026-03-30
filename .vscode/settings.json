@@ -1,0 +1,14 @@
+{
+  "task.allowAutomaticTasks": "off",
+  "npm.autoDetect": "off",
+  "typescript.tsc.autoDetect": "off",
+  "grunt.autoDetect": "off",
+  "gulp.autoDetect": "off",
+  "jake.autoDetect": "off",
+  "python.terminal.activateEnvironment": false,
+  "python.terminal.launchArgs": [],
+  "code-runner.runInTerminal": false,
+  "code-runner.saveFileBeforeRun": false,
+  "debug.javascript.autoAttachFilter": "disabled",
+  "terminal.integrated.shellIntegration.enabled": false
+}
