@@ -10,8 +10,16 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import { Container } from "@/components/ui/container";
 
-const SCALE_STEPS = [1, 0.96, 0.92];
-const OPACITY_STEPS = [1, 0.96, 0.9];
+const SCALE_STEPS = [1, 0.8965, 0.791, 0.687, 0.582];
+const OPACITY_STEPS = [1, 0.94, 0.88, 0.8, 0.72];
+
+function getCardScale(distance) {
+  return SCALE_STEPS[Math.min(distance, SCALE_STEPS.length - 1)];
+}
+
+function getCardOpacity(distance) {
+  return OPACITY_STEPS[Math.min(distance, OPACITY_STEPS.length - 1)];
+}
 
 function createPosterDataUri(name, accentColor, baseColor) {
   const svg = `
@@ -22,11 +30,6 @@ function createPosterDataUri(name, accentColor, baseColor) {
           <stop offset="52%" stop-color="${accentColor}" />
           <stop offset="100%" stop-color="#0f172a" />
         </linearGradient>
-        <radialGradient id="glow" cx="50%" cy="16%" r="38%">
-          <stop offset="0%" stop-color="rgba(255,255,255,0.58)" />
-          <stop offset="28%" stop-color="rgba(255,255,255,0.16)" />
-          <stop offset="60%" stop-color="rgba(255,255,255,0)" />
-        </radialGradient>
         <linearGradient id="shade" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stop-color="rgba(15,23,42,0.03)" />
           <stop offset="65%" stop-color="rgba(15,23,42,0.18)" />
@@ -34,12 +37,7 @@ function createPosterDataUri(name, accentColor, baseColor) {
         </linearGradient>
       </defs>
       <rect width="720" height="1280" rx="56" fill="url(#bg)" />
-      <rect width="720" height="1280" rx="56" fill="url(#glow)" />
       <rect width="720" height="1280" rx="56" fill="url(#shade)" />
-      <circle cx="360" cy="458" r="138" fill="rgba(255,255,255,0.16)" />
-      <rect x="220" y="650" width="280" height="24" rx="12" fill="rgba(255,255,255,0.15)" />
-      <rect x="248" y="696" width="224" height="18" rx="9" fill="rgba(255,255,255,0.11)" />
-      <text x="360" y="1112" text-anchor="middle" fill="white" font-family="Poppins, Arial, sans-serif" font-size="44" font-weight="600">${name}</text>
     </svg>
   `;
 
@@ -106,9 +104,9 @@ function applySlideStyles(swiper) {
   }
 
   swiper.slides.forEach((slideEl) => {
-    const progress = Math.min(2, Math.round(Math.abs(slideEl.progress)));
-    slideEl.style.setProperty("--card-scale", String(SCALE_STEPS[progress]));
-    slideEl.style.setProperty("--card-opacity", String(OPACITY_STEPS[progress]));
+    const distance = Math.round(Math.abs(slideEl.progress));
+    slideEl.style.setProperty("--card-scale", String(getCardScale(distance)));
+    slideEl.style.setProperty("--card-opacity", String(getCardOpacity(distance)));
   });
 }
 
@@ -170,18 +168,19 @@ function StarRow({ rating }) {
 }
 
 function SocialProofCard({ item, distance, isActive, onToggleMute, onTogglePlay, registerVideo }) {
-  const cardScale = SCALE_STEPS[Math.min(distance, 2)];
-  const cardOpacity = OPACITY_STEPS[Math.min(distance, 2)];
+  const cardScale = getCardScale(distance);
+  const cardOpacity = getCardOpacity(distance);
 
   return (
     <article
-      className="social-proof-card-shell relative mx-auto aspect-[3/4] w-full max-w-[228px] sm:max-w-[238px] lg:max-w-[248px]"
+      className="social-proof-card-shell relative mx-auto w-full"
       style={{
+        aspectRatio: "9.6 / 14",
         "--manual-card-scale": cardScale,
         "--manual-card-opacity": cardOpacity,
       }}
     >
-      <div className="relative h-full overflow-hidden rounded-[32px] border border-white/70 bg-white shadow-[0_30px_90px_rgba(15,23,42,0.18)]">
+      <div className="relative h-full overflow-hidden rounded-[16px] border border-white/70 bg-white">
         {item.videoSrc ? (
           <video
             ref={(node) => registerVideo(item.id, node)}
@@ -201,14 +200,12 @@ function SocialProofCard({ item, distance, isActive, onToggleMute, onTogglePlay,
         )}
 
         <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
-        <div className="absolute inset-0 rounded-[32px] ring-1 ring-inset ring-white/12" />
-
         <div className="absolute right-3 top-3 flex items-center gap-2">
           <button
             type="button"
             aria-label={item.muted ? `Ativar som de ${item.name}` : `Silenciar ${item.name}`}
             onClick={() => onToggleMute(item.id)}
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/28 bg-white/18 text-white shadow-[0_14px_32px_rgba(0,0,0,0.16)] backdrop-blur-md transition hover:bg-white/26"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-slate-500/35 text-white transition hover:bg-slate-400/45"
           >
             <VolumeIcon muted={item.muted} />
           </button>
@@ -216,26 +213,16 @@ function SocialProofCard({ item, distance, isActive, onToggleMute, onTogglePlay,
             type="button"
             aria-label={item.playing ? `Pausar video de ${item.name}` : `Reproduzir video de ${item.name}`}
             onClick={() => onTogglePlay(item.id)}
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/28 bg-white/18 text-white shadow-[0_14px_32px_rgba(0,0,0,0.16)] backdrop-blur-md transition hover:bg-white/26"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-slate-500/35 text-white transition hover:bg-slate-400/45"
           >
             <PlayIcon playing={item.playing} />
           </button>
         </div>
 
-        {!item.videoSrc ? (
-          <div className="absolute inset-x-5 top-1/2 -translate-y-1/2 rounded-full border border-white/18 bg-white/12 px-4 py-1.5 text-center text-[10px] font-medium uppercase tracking-[0.22em] text-white/78 backdrop-blur-sm">
-            Placeholder video
-          </div>
-        ) : null}
-
         <div className="absolute inset-x-0 bottom-0 flex flex-col items-center px-4 pb-6 text-center">
           <p className="text-[16px] font-semibold tracking-[0.01em] text-white">{item.name}</p>
           <StarRow rating={item.rating} />
         </div>
-
-        {isActive ? (
-          <div className="pointer-events-none absolute inset-0 rounded-[32px] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.16)]" />
-        ) : null}
       </div>
     </article>
   );
@@ -246,15 +233,15 @@ export default function SocialProof() {
   const [activeIndex, setActiveIndex] = useState(2);
   const swiperRef = useRef(null);
   const videoRefs = useRef({});
+  const slides = useMemo(() => [...items, ...items], [items]);
 
-  const activeItemId = items[activeIndex]?.id;
-
-  const orderedIds = useMemo(() => items.map((item) => item.id), [items]);
+  const activeSlide = slides[activeIndex];
+  const orderedIndexes = useMemo(() => slides.map((_, index) => index), [slides]);
 
   useEffect(() => {
-    orderedIds.forEach((id) => {
-      const video = videoRefs.current[id];
-      const item = items.find((entry) => entry.id === id);
+    orderedIndexes.forEach((index) => {
+      const video = videoRefs.current[index];
+      const item = slides[index];
 
       if (!video || !item) {
         return;
@@ -262,13 +249,13 @@ export default function SocialProof() {
 
       video.muted = item.muted;
 
-      if (id === activeItemId && item.playing) {
+      if (index === activeIndex && item.playing) {
         video.play().catch(() => {});
       } else {
         video.pause();
       }
     });
-  }, [activeItemId, items, orderedIds]);
+  }, [activeIndex, orderedIndexes, slides]);
 
   const toggleMute = (id) => {
     setItems((current) => current.map((item) => (item.id === id ? { ...item, muted: !item.muted } : item)));
@@ -287,29 +274,32 @@ export default function SocialProof() {
   };
 
   return (
-    <section className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-white py-14 sm:py-16">
-      <Container className="relative flex w-full justify-center">
-        <div className="relative mx-auto flex w-full max-w-[1440px] justify-center px-4 sm:px-8 lg:px-10">
-          <div className="relative flex w-full max-w-[1280px] items-center justify-center">
-            <button
-              type="button"
-              aria-label="Ver testemunho anterior"
-              onClick={() => swiperRef.current?.slidePrev()}
-              className="absolute left-[7.5%] top-1/2 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-[#111827]/92 text-white shadow-[0_18px_46px_rgba(15,23,42,0.22)] transition hover:scale-[1.03] hover:bg-black sm:left-[8.5%] lg:left-[9.5%]"
-            >
-              <ChevronIcon direction="left" />
-            </button>
+    <section className="relative flex w-full items-center justify-center overflow-hidden bg-white py-0">
+      <Container className="relative flex w-full max-w-none justify-center px-0">
+        <div className="relative mx-auto flex w-full max-w-[1560px] justify-center px-4 sm:px-8 lg:px-10">
+          <div className="relative flex w-full max-w-[1440px] items-center justify-center">
+            <div className="social-proof-frame relative mx-auto w-full max-w-[380px] sm:max-w-[713px] lg:max-w-[1195.8px]">
+              <button
+                type="button"
+                aria-label="Ver testemunho anterior"
+                onClick={() => swiperRef.current?.slidePrev()}
+                className="social-proof-arrow absolute top-1/2 z-30 flex h-12 w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full text-white transition-all duration-[250ms] ease-in-out hover:scale-[1.03]"
+                style={{ left: "40px" }}
+              >
+                <ChevronIcon direction="left" />
+              </button>
 
-            <button
-              type="button"
-              aria-label="Ver proximo testemunho"
-              onClick={() => swiperRef.current?.slideNext()}
-              className="absolute right-[7.5%] top-1/2 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-[#111827]/92 text-white shadow-[0_18px_46px_rgba(15,23,42,0.22)] transition hover:scale-[1.03] hover:bg-black sm:right-[8.5%] lg:right-[9.5%]"
-            >
-              <ChevronIcon direction="right" />
-            </button>
+              <button
+                type="button"
+                aria-label="Ver proximo testemunho"
+                onClick={() => swiperRef.current?.slideNext()}
+                className="social-proof-arrow absolute top-1/2 z-30 flex h-12 w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full text-white transition-all duration-[250ms] ease-in-out hover:scale-[1.03]"
+                style={{ right: "40px" }}
+              >
+                <ChevronIcon direction="right" />
+              </button>
 
-            <div className="mx-auto w-full max-w-[1200px]">
+              <div className="social-proof-window mx-auto w-full overflow-hidden">
               <Swiper
                 modules={[EffectCoverflow]}
                 onSwiper={(swiper) => {
@@ -339,8 +329,8 @@ export default function SocialProof() {
                   slideShadows: false,
                 }}
                 centeredSlidesBounds
-                spaceBetween={8}
-                slidesPerView={1.25}
+                spaceBetween={10}
+                slidesPerView={1.5}
                 breakpoints={{
                   768: {
                     slidesPerView: 3,
@@ -351,21 +341,22 @@ export default function SocialProof() {
                     spaceBetween: 10,
                   },
                 }}
-                className="social-proof-swiper social-proof-stage !overflow-visible"
+                className="social-proof-swiper social-proof-stage"
               >
-                {items.map((item, index) => (
-                  <SwiperSlide key={item.id} className="!flex !h-auto items-center justify-center">
+                {slides.map((item, index) => (
+                  <SwiperSlide key={`${item.id}-${index}`} className="!flex !h-auto items-center justify-center">
                     <SocialProofCard
                       item={item}
-                      distance={getRelativeDistance(index, activeIndex, items.length)}
-                      isActive={item.id === activeItemId}
+                      distance={getRelativeDistance(index, activeIndex, slides.length)}
+                      isActive={index === activeIndex && item.id === activeSlide?.id}
                       onToggleMute={toggleMute}
                       onTogglePlay={togglePlay}
-                      registerVideo={registerVideo}
+                      registerVideo={(id, node) => registerVideo(index, node)}
                     />
                   </SwiperSlide>
                 ))}
               </Swiper>
+              </div>
             </div>
           </div>
         </div>
@@ -375,17 +366,38 @@ export default function SocialProof() {
         .social-proof-swiper {
           position: relative;
           display: block;
-          background: #ffffff;
-          overflow: visible;
+          background: transparent;
+          box-shadow: none;
+          overflow: hidden;
           z-index: 1;
           margin: 0 auto;
-          padding: 2rem 0;
+          padding: 0;
+        }
+
+        .social-proof-arrow {
+          background: #cbd5e1;
+          color: #0f172a;
+        }
+
+        .social-proof-arrow:hover {
+          background: #ffffff;
+          color: #cbd5e1;
+        }
+
+        .social-proof-frame,
+        .social-proof-window {
+          position: relative;
+          background: transparent;
+          box-shadow: none;
+          padding: 0;
         }
 
         .social-proof-stage {
           display: flex;
           align-items: center;
-          min-height: 620px;
+          background: transparent;
+          box-shadow: none;
+          min-height: 380px;
         }
 
         .social-proof-swiper .swiper-wrapper {
@@ -394,6 +406,8 @@ export default function SocialProof() {
           width: 100%;
           min-height: inherit;
           align-items: center;
+          background: transparent;
+          box-shadow: none;
           box-sizing: content-box;
           transition-property: transform;
         }
@@ -404,8 +418,8 @@ export default function SocialProof() {
           height: auto;
           min-height: inherit;
           flex-shrink: 0;
-          width: auto;
-          padding: 0 2px;
+          background: transparent;
+          box-shadow: none;
           align-items: center;
           justify-content: center;
           transition-property: transform;
@@ -429,19 +443,36 @@ export default function SocialProof() {
           display: none;
         }
 
+        .social-proof-frame::before,
+        .social-proof-frame::after,
+        .social-proof-window::before,
+        .social-proof-window::after,
+        .social-proof-swiper::before,
+        .social-proof-swiper::after {
+          content: none;
+        }
+
         @media (max-width: 1099px) {
+          .social-proof-window {
+            padding: 0;
+          }
+
           .social-proof-swiper {
-            padding: 1.5rem 0;
+            padding: 0;
           }
 
           .social-proof-stage {
-            min-height: 560px;
+            min-height: 340px;
           }
         }
 
         @media (max-width: 767px) {
+          .social-proof-window {
+            padding: 0;
+          }
+
           .social-proof-stage {
-            min-height: 500px;
+            min-height: 300px;
           }
         }
       `}</style>
