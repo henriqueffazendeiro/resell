@@ -1,4 +1,5 @@
 import "@/styles/globals.css";
+import "@/styles/how-it-works.css";
 import { SiteHeader } from "@/components/navigation/site-header";
 import { siteConfig } from "@/lib/config/site";
 

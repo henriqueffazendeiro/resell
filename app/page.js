@@ -1,4 +1,6 @@
 import Hero from "@/sections/Hero";
+import HowItWorks from "@/sections/HowItWorks";
+import PricingSection from "@/sections/PricingSection";
 import SocialProof from "@/sections/SocialProof";
 
 export default function HomePage() {
@@ -11,6 +13,8 @@ export default function HomePage() {
         </p>
       </section>
       <SocialProof />
+      <HowItWorks />
+      <PricingSection />
     </>
   );
 }
