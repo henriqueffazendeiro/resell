@@ -363,11 +363,7 @@ export default function PricingSection() {
           display: flex;
           justify-content: center;
           padding: 7rem 1.5rem;
-          background: linear-gradient(
-            180deg,
-            rgba(15, 23, 42, 0) 0%,
-            rgba(15, 23, 42, 0.06) 100%
-          );
+          background: #ffffff;
         }
 
         .pricing-shell {
