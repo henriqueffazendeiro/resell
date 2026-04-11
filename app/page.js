@@ -1,6 +1,7 @@
 import Hero from "@/sections/Hero";
 import LaurelWreath from "@/components/LaurelWreath";
 import FaqSection from "@/sections/FaqSection";
+import GuaranteeSection from "@/sections/GuaranteeSection";
 import HowItWorks from "@/sections/HowItWorks";
 import PricingSection from "@/sections/PricingSection";
 import SocialProof from "@/sections/SocialProof";
@@ -22,6 +23,7 @@ export default function HomePage() {
       <HowItWorks />
       <PricingSection />
       <FaqSection />
+      <GuaranteeSection />
       <footer className="w-full bg-white pt-8 pb-3">
         <div className="relative w-full overflow-hidden">
           <svg viewBox="0 0 1000 170" aria-hidden="true" className="block h-auto w-full">
