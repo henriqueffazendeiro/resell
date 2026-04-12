@@ -84,14 +84,14 @@ export default function HowItWorks() {
   const activeStep = STEPS.find((step) => step.id === activeStepId) ?? STEPS[0];
 
   return (
-    <section className="flex justify-center bg-white px-4 py-20 text-slate-950 sm:px-6 lg:px-8 lg:py-28">
-      <div className="mx-auto grid w-full max-w-[1320px] grid-cols-1 gap-10 lg:grid-cols-[1fr_2fr] lg:gap-12">
+    <section className="flex justify-center bg-white px-4 py-16 text-slate-950 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
+      <div className="mx-auto grid w-full max-w-[1320px] grid-cols-1 gap-8 lg:grid-cols-[1fr_2fr] lg:gap-12">
         <div className="flex flex-col justify-between">
           <div className="max-w-xl">
-            <h2 className="text-[34px] font-semibold leading-[1.08] tracking-[-0.03em] text-slate-950 sm:text-[42px]">
+            <h2 className="text-[30px] font-semibold leading-[1.08] tracking-[-0.03em] text-slate-950 sm:text-[42px]">
               Como Funciona
             </h2>
-            <p className="mt-8 text-[14px] font-bold text-slate-950">
+            <p className="mt-5 text-[14px] font-bold text-slate-950 sm:mt-8">
               {activeStep.title}
             </p>
             <p className="mt-2 max-w-xl text-[14px] leading-relaxed text-slate-600">
@@ -99,7 +99,7 @@ export default function HowItWorks() {
             </p>
           </div>
 
-          <div className="mt-8 flex flex-col gap-3">
+          <div className="mt-6 flex flex-col gap-3 sm:mt-8">
             {STEPS.map((step) => (
               <StepCard key={step.id} step={step} isActive={step.id === activeStep.id} onClick={() => setActiveStepId(step.id)} />
             ))}
