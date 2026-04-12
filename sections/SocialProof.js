@@ -53,7 +53,7 @@ const INITIAL_TESTIMONIALS = [
     id: 4,
     name: "Testemunho 4",
     rating: 5,
-    videoSrc: "/video4.mp4",
+    videoSrc: "/ssstik.io_1775931249473.mp4",
     thumbnail: "",
     videoClassName: "scale-[1.22] object-center",
     muted: true,
@@ -324,7 +324,7 @@ export default function SocialProof() {
                 }}
                 centeredSlidesBounds={false}
                 spaceBetween={4}
-                slidesPerView={1.38}
+                slidesPerView={1.46}
                 breakpoints={{
                   768: {
                     centeredSlidesBounds: false,
@@ -504,7 +504,7 @@ export default function SocialProof() {
           }
 
           .social-proof-stage {
-            min-height: 332px;
+            min-height: 318px;
           }
         }
       `}</style>

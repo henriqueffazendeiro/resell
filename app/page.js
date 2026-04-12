@@ -35,7 +35,7 @@ export default function HomePage() {
           </div>
           <p className="whitespace-nowrap text-[12px] tracking-[0.01em] text-white">
             <span className="font-semibold">200+</span>{" "}
-            <span className="font-normal">membros satisfeitos</span>
+            <span className="font-normal">Faturam 4 dígitos mensais</span>
           </p>
         </div>
       </section>
