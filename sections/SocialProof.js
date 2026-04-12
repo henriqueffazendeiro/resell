@@ -24,8 +24,8 @@ function getCardOpacity(distance) {
 const INITIAL_TESTIMONIALS = [
   {
     id: 1,
-    name: "Testemunho 1",
-    rating: 5,
+    name: "Joao Silva",
+    result: "+3000€",
     videoSrc: "/video1.mp4",
     thumbnail: "",
     muted: true,
@@ -33,8 +33,8 @@ const INITIAL_TESTIMONIALS = [
   },
   {
     id: 2,
-    name: "Testemunho 2",
-    rating: 5,
+    name: "Miguel Costa",
+    result: "+1800€",
     videoSrc: "/video2.mp4",
     thumbnail: "",
     muted: true,
@@ -42,8 +42,8 @@ const INITIAL_TESTIMONIALS = [
   },
   {
     id: 3,
-    name: "Testemunho 3",
-    rating: 5,
+    name: "Andre Ferreira",
+    result: "+4200€",
     videoSrc: "/video3.mp4",
     thumbnail: "",
     muted: true,
@@ -51,8 +51,8 @@ const INITIAL_TESTIMONIALS = [
   },
   {
     id: 4,
-    name: "Testemunho 4",
-    rating: 5,
+    name: "Rita Martins",
+    result: "+2500€",
     videoSrc: "/ssstik.io_1775931249473.mp4",
     thumbnail: "",
     videoClassName: "scale-[1.22] object-center",
@@ -61,8 +61,8 @@ const INITIAL_TESTIMONIALS = [
   },
   {
     id: 5,
-    name: "Testemunho 5",
-    rating: 5,
+    name: "Beatriz Santos",
+    result: "+5200€",
     videoSrc: "/video5.mp4",
     thumbnail: "",
     videoClassName: "scale-[1.22] object-center",
@@ -142,14 +142,10 @@ function VolumeIcon({ muted }) {
   );
 }
 
-function StarRow({ rating }) {
+function ResultBadge({ value }) {
   return (
-    <div className="mt-2 flex items-center justify-center gap-1">
-      {Array.from({ length: rating }).map((_, index) => (
-        <svg key={index} aria-hidden="true" viewBox="0 0 24 24" className="h-3.5 w-3.5 fill-white/95">
-          <path d="m12 17.27 6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-        </svg>
-      ))}
+    <div className="mt-2 inline-flex items-center justify-center rounded-full border border-white/20 bg-white/12 px-3 py-1 text-[13px] font-semibold tracking-[0.01em] text-white backdrop-blur-sm">
+      {value}
     </div>
   );
 }
@@ -210,7 +206,7 @@ function SocialProofCard({ item, distance, isActive, onToggleMute, onTogglePlay,
 
         <div className="absolute inset-x-0 bottom-0 flex flex-col items-center px-4 pb-6 text-center">
           <p className="text-[16px] font-semibold tracking-[0.01em] text-white">{item.name}</p>
-          <StarRow rating={item.rating} />
+          <ResultBadge value={item.result} />
         </div>
       </div>
     </article>
