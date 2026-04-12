@@ -72,8 +72,15 @@ a {
 }
 
 .header-blur-layer {
+  background: #fff;
+}
+
+@media (min-width: 768px) {
+  .header-blur-layer {
+    background: transparent;
   -webkit-mask-image: linear-gradient(to bottom, black 25%, transparent 100%);
-  mask-image: linear-gradient(to bottom, black 25%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 25%, transparent 100%);
+  }
 }
 
 .title-word {
