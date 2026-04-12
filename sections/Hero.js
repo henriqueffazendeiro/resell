@@ -11,10 +11,10 @@ const MEMBER_AVATARS = [
 
 export default function Hero() {
   return (
-    <section className="relative flex min-h-screen min-h-svh items-start justify-center overflow-hidden bg-white px-4 pt-6 sm:items-center sm:px-6 sm:pt-0">
+    <section className="relative flex min-h-screen min-h-svh items-start justify-center overflow-hidden bg-white px-4 pt-8 sm:items-center sm:px-6 sm:pt-0">
       <div className="pointer-events-none absolute inset-x-0 bottom-[-18%] h-[42vh] bg-[radial-gradient(ellipse_at_center,rgba(2,119,131,0.12)_0%,rgba(2,119,131,0.06)_30%,rgba(2,119,131,0.02)_50%,rgba(255,255,255,0)_72%)] blur-3xl" />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-2xl flex-col items-center justify-center gap-5 px-2 text-center sm:gap-6 sm:px-0">
+      <div className="relative z-10 mx-auto flex w-full max-w-2xl flex-col items-center justify-center gap-6 px-2 text-center sm:gap-6 sm:px-0">
         <Image
           src="/logo.png"
           alt="Logo"
