@@ -1,3 +1,4 @@
+import Image from "next/image";
 import PromoBadge from "@/components/PromoBadge";
 import SocialProof from "@/sections/SocialProof";
 
@@ -14,6 +15,15 @@ export default function Hero() {
       <div className="pointer-events-none absolute inset-x-0 bottom-[-18%] h-[42vh] bg-[radial-gradient(ellipse_at_center,rgba(2,119,131,0.12)_0%,rgba(2,119,131,0.06)_30%,rgba(2,119,131,0.02)_50%,rgba(255,255,255,0)_72%)] blur-3xl" />
 
       <div className="relative z-10 mx-auto flex w-full max-w-2xl flex-col items-center justify-center gap-5 text-center sm:gap-6">
+        <Image
+          src="/logo.png"
+          alt="Logo"
+          width={112}
+          height={32}
+          className="h-auto w-28 sm:hidden"
+          priority
+        />
+
         <PromoBadge />
 
         <h1 className="title-reveal flex flex-col items-center justify-center text-[38px] font-bold leading-[1.08] tracking-tight text-slate-900 sm:text-[57px] sm:leading-[1.15]">
