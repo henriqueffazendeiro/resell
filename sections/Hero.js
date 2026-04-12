@@ -81,10 +81,12 @@ export default function Hero() {
                 </div>
               ))}
             </div>
-            <p className="whitespace-nowrap text-[12px] tracking-[0.01em] text-slate-900">
-              <span className="font-semibold">200+</span>{" "}
-              <span className="font-normal text-slate-600">membros satisfeitos</span>
-            </p>
+            <div className="flex flex-col items-start leading-none">
+              <span className="text-[12px] font-semibold tracking-[0.01em] text-slate-900">200+</span>
+              <span className="mt-1 text-[12px] font-normal tracking-[0.01em] text-slate-600">
+                Faturam 4 dígitos mensais
+              </span>
+            </div>
           </div>
         </section>
 
