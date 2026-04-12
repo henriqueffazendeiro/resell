@@ -21,72 +21,51 @@ function getCardOpacity(distance) {
   return OPACITY_STEPS[Math.min(distance, OPACITY_STEPS.length - 1)];
 }
 
-function createPosterDataUri(name, accentColor, baseColor) {
-  const svg = `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 1280">
-      <defs>
-        <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="${baseColor}" />
-          <stop offset="52%" stop-color="${accentColor}" />
-          <stop offset="100%" stop-color="#0f172a" />
-        </linearGradient>
-        <linearGradient id="shade" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="rgba(15,23,42,0.03)" />
-          <stop offset="65%" stop-color="rgba(15,23,42,0.18)" />
-          <stop offset="100%" stop-color="rgba(2,6,23,0.88)" />
-        </linearGradient>
-      </defs>
-      <rect width="720" height="1280" rx="56" fill="url(#bg)" />
-      <rect width="720" height="1280" rx="56" fill="url(#shade)" />
-    </svg>
-  `;
-
-  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
-}
-
 const INITIAL_TESTIMONIALS = [
   {
     id: 1,
-    name: "Rafael Ventura",
+    name: "Testemunho 1",
     rating: 5,
-    videoSrc: "",
-    thumbnail: createPosterDataUri("Rafael Ventura", "#5e8b8c", "#d9e7e4"),
+    videoSrc: "/video1.mp4",
+    thumbnail: "",
     muted: true,
     playing: false,
   },
   {
     id: 2,
-    name: "Manuel Jo\u00e3o",
+    name: "Testemunho 2",
     rating: 5,
-    videoSrc: "",
-    thumbnail: createPosterDataUri("Manuel Joao", "#9b7b5d", "#efe5d8"),
+    videoSrc: "/video2.mp4",
+    thumbnail: "",
     muted: true,
     playing: false,
   },
   {
     id: 3,
-    name: "Vasco McMeska",
+    name: "Testemunho 3",
     rating: 5,
-    videoSrc: "",
-    thumbnail: createPosterDataUri("Vasco McMeska", "#63799c", "#e4e8f5"),
+    videoSrc: "/video3.mp4",
+    thumbnail: "",
     muted: true,
     playing: true,
   },
   {
     id: 4,
-    name: "Bernardo Henrique",
+    name: "Testemunho 4",
     rating: 5,
-    videoSrc: "",
-    thumbnail: createPosterDataUri("Bernardo Henrique", "#7f8f67", "#dde8d7"),
+    videoSrc: "/video4.mp4",
+    thumbnail: "",
+    videoClassName: "scale-[1.22] object-center",
     muted: true,
     playing: false,
   },
   {
     id: 5,
-    name: "ZeroZero",
+    name: "Testemunho 5",
     rating: 5,
-    videoSrc: "",
-    thumbnail: createPosterDataUri("ZeroZero", "#8f6672", "#f1dee3"),
+    videoSrc: "/video5.mp4",
+    thumbnail: "",
+    videoClassName: "scale-[1.22] object-center",
     muted: true,
     playing: false,
   },
@@ -130,27 +109,35 @@ function ChevronIcon({ direction = "right" }) {
 function PlayIcon({ playing }) {
   if (playing) {
     return (
-      <svg aria-hidden="true" viewBox="0 0 24 24" className="h-3.5 w-3.5 fill-current">
-        <path d="M7 5h3v14H7zm7 0h3v14h-3z" />
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 16 16"
+        className="block h-6 w-6 shrink-0 fill-current"
+      >
+        <path d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5zm5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5z" />
       </svg>
     );
   }
 
   return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-3.5 w-3.5 fill-current">
-      <path d="M8 6.5v11l9-5.5z" />
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 16 16"
+      className="block h-6 w-6 shrink-0 fill-current"
+    >
+      <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z" />
     </svg>
   );
 }
 
 function VolumeIcon({ muted }) {
   return muted ? (
-    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-3.5 w-3.5 fill-current">
-      <path d="M5 10v4h3l4 4V6l-4 4zm10.5 2 3.5 3.5-1.5 1.5L14 13.5 10.5 17 9 15.5l3.5-3.5L9 8.5 10.5 7 14 10.5 17.5 7 19 8.5z" />
+    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-6 w-6 fill-current">
+      <path d="M5.889 16H2a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h3.889l5.294-4.332a.5.5 0 0 1 .817.387v15.89a.5.5 0 0 1-.817.387L5.89 16zm14.525-4l3.536 3.536-1.414 1.414L19 13.414l-3.536 3.536-1.414-1.414L17.586 12 14.05 8.464l1.414-1.414L19 10.586l3.536-3.536 1.414 1.414L20.414 12z" />
     </svg>
   ) : (
-    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-3.5 w-3.5 fill-current">
-      <path d="M5 10v4h3l4 4V6l-4 4zm10 2c0-1.77-1-3.29-2.47-4.03v8.05A4.48 4.48 0 0 0 15 12m0-7v2.06c2.84.48 5 2.94 5 5.94s-2.16 5.46-5 5.94V21c3.95-.49 7-3.85 7-8s-3.05-7.51-7-8" />
+    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-6 w-6 fill-current">
+      <path d="M5.889 16H2a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h3.889l5.294-4.332a.5.5 0 0 1 .817.387v15.89a.5.5 0 0 1-.817.387L5.89 16zm13.517 4.134l-1.416-1.416A8.978 8.978 0 0 0 21 12a8.982 8.982 0 0 0-3.304-6.968l1.42-1.42A10.976 10.976 0 0 1 23 12c0 3.223-1.386 6.122-3.594 8.134zm-3.543-3.543l-1.422-1.422A3.993 3.993 0 0 0 16 12c0-1.43-.75-2.685-1.88-3.392l1.439-1.439A5.991 5.991 0 0 1 18 12c0 1.842-.83 3.49-2.137 4.591z" />
     </svg>
   );
 }
@@ -190,7 +177,7 @@ function SocialProofCard({ item, distance, isActive, onToggleMute, onTogglePlay,
             loop
             playsInline
             preload="metadata"
-            className="absolute inset-0 h-full w-full object-cover"
+            className={`absolute inset-0 h-full w-full object-cover ${item.videoClassName ?? ""}`}
           />
         ) : (
           <div
@@ -205,7 +192,8 @@ function SocialProofCard({ item, distance, isActive, onToggleMute, onTogglePlay,
             type="button"
             aria-label={item.muted ? `Ativar som de ${item.name}` : `Silenciar ${item.name}`}
             onClick={() => onToggleMute(item.id)}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-slate-500/35 text-white transition hover:bg-slate-400/45"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white transition"
+            style={{ backgroundColor: "#FFFFFF4D" }}
           >
             <VolumeIcon muted={item.muted} />
           </button>
@@ -213,7 +201,8 @@ function SocialProofCard({ item, distance, isActive, onToggleMute, onTogglePlay,
             type="button"
             aria-label={item.playing ? `Pausar video de ${item.name}` : `Reproduzir video de ${item.name}`}
             onClick={() => onTogglePlay(item.id)}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-slate-500/35 text-white transition hover:bg-slate-400/45"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white transition"
+            style={{ backgroundColor: "#FFFFFF4D" }}
           >
             <PlayIcon playing={item.playing} />
           </button>
@@ -234,7 +223,6 @@ export default function SocialProof() {
   const swiperRef = useRef(null);
   const videoRefs = useRef({});
   const slides = useMemo(() => [...items, ...items], [items]);
-
   const activeSlide = slides[activeIndex];
   const orderedIndexes = useMemo(() => slides.map((_, index) => index), [slides]);
 
@@ -305,10 +293,16 @@ export default function SocialProof() {
                 onSwiper={(swiper) => {
                   swiperRef.current = swiper;
                   setActiveIndex(swiper.realIndex);
+                  setItems((current) =>
+                    current.map((item, index) => (index === swiper.realIndex ? { ...item, playing: true } : item))
+                  );
                   applySlideStyles(swiper);
                 }}
                 onSlideChange={(swiper) => {
                   setActiveIndex(swiper.realIndex);
+                  setItems((current) =>
+                    current.map((item, index) => (index === swiper.realIndex ? { ...item, playing: true } : item))
+                  );
                 }}
                 onProgress={applySlideStyles}
                 onSetTranslate={applySlideStyles}
