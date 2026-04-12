@@ -1,6 +1,5 @@
 import "@/styles/globals.css";
 import "@/styles/how-it-works.css";
-import { SiteHeader } from "@/components/navigation/site-header";
 import { siteConfig } from "@/lib/config/site";
 
 export const metadata = {
@@ -12,7 +11,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="pt">
       <body className="min-h-screen bg-page text-foreground font-sans antialiased">
-        <SiteHeader />
         {children}
       </body>
     </html>
