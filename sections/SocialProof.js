@@ -262,11 +262,11 @@ export default function SocialProof() {
   };
 
   return (
-    <section className="relative flex w-full items-center justify-center overflow-hidden bg-white py-0">
-      <Container className="relative flex w-full max-w-none justify-center px-0">
-        <div className="relative mx-auto flex w-full max-w-[1560px] justify-center px-4 sm:px-8 lg:px-10">
-          <div className="relative flex w-full max-w-[1440px] items-center justify-center">
-            <div className="social-proof-frame relative mx-auto w-full max-w-[380px] sm:max-w-[713px] lg:max-w-[1195.8px]">
+    <section className="social-proof-root relative flex w-full items-center justify-center overflow-hidden bg-white py-0">
+      <Container className="social-proof-container relative flex w-full max-w-none justify-center px-0">
+        <div className="social-proof-outer relative mx-auto flex w-full max-w-[1560px] justify-center px-0 sm:px-8 lg:px-10">
+          <div className="social-proof-inner relative flex w-full items-center justify-center sm:max-w-[1440px]">
+            <div className="social-proof-frame relative mx-auto w-full max-w-none sm:max-w-[713px] lg:max-w-[1195.8px]">
               <button
                 type="button"
                 aria-label="Ver testemunho anterior"
@@ -322,15 +322,17 @@ export default function SocialProof() {
                   scale: 1,
                   slideShadows: false,
                 }}
-                centeredSlidesBounds
-                spaceBetween={10}
-                slidesPerView={1.5}
+                centeredSlidesBounds={false}
+                spaceBetween={4}
+                slidesPerView={1.38}
                 breakpoints={{
                   768: {
+                    centeredSlidesBounds: false,
                     slidesPerView: 3,
                     spaceBetween: 10,
                   },
                   1100: {
+                    centeredSlidesBounds: false,
                     slidesPerView: 5,
                     spaceBetween: 10,
                   },
@@ -461,12 +463,48 @@ export default function SocialProof() {
         }
 
         @media (max-width: 767px) {
+          .social-proof-root {
+            overflow: visible;
+          }
+
+          .social-proof-container,
+          .social-proof-outer,
+          .social-proof-inner,
+          .social-proof-frame {
+            width: 100% !important;
+            max-width: none !important;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+          }
+
+          .social-proof-frame,
+          .social-proof-window,
+          .social-proof-swiper {
+            overflow: visible;
+          }
+
+          .social-proof-arrow {
+            display: none;
+          }
+
           .social-proof-window {
             padding: 0;
           }
 
+          .social-proof-swiper .swiper-slide {
+            padding-left: 2px;
+            padding-right: 2px;
+          }
+
+          .social-proof-card-shell {
+            width: 100%;
+            max-width: none;
+          }
+
           .social-proof-stage {
-            min-height: 300px;
+            min-height: 332px;
           }
         }
       `}</style>

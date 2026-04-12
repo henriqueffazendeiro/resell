@@ -39,16 +39,26 @@ export default function FaqSection() {
 
   return (
     <section
-      className="flex justify-center bg-white px-4 py-20 text-slate-950 sm:px-6 lg:px-8 lg:py-28"
+      className="flex justify-center bg-white px-4 py-16 text-slate-950 sm:px-6 sm:py-20 lg:px-8 lg:py-28"
       aria-label="Perguntas frequentes"
     >
       <div className="flex w-full max-w-[1320px] flex-col items-center text-center">
-        <h2 className="text-[34px] font-semibold leading-[1.08] tracking-[-0.03em] text-slate-950 sm:text-[42px]">
+        <header
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "0.85rem",
+            marginBottom: "40px",
+          }}
+        >
+        <h2 className="text-[30px] font-semibold leading-[1.08] tracking-[-0.03em] text-slate-950 sm:text-[42px]" style={{ margin: 0 }}>
           Perguntas frequentes
         </h2>
-        <p className="mt-4 mb-[40px] max-w-[34rem] text-center text-[14px] leading-[1.6] text-slate-600">
+        <p className="max-w-[34rem] text-center text-[14px] leading-[1.6] text-slate-600" style={{ margin: 0 }}>
           Tens dúvidas? Encontras aqui as respostas para as perguntas mais comuns.
         </p>
+        </header>
 
         <div className="w-full overflow-hidden rounded-[18px] border border-slate-200 bg-white text-left shadow-[0_1px_0_rgba(15,23,42,0.02)]">
           {FAQ_ITEMS.map((item, index) => {
@@ -56,12 +66,12 @@ export default function FaqSection() {
 
             return (
               <div key={item.question} className="w-full">
-                <div className="w-full px-6 py-5 sm:px-7">
+                <div className="w-full px-4 py-4 sm:px-7 sm:py-5">
                   <button
                     type="button"
                     onClick={() => toggleQuestion(item.question)}
                     aria-expanded={isOpen}
-                    className="flex w-full items-center justify-between gap-4 text-left text-[16px] font-semibold tracking-[-0.01em] text-slate-950"
+                    className="flex w-full items-center justify-between gap-3 text-left text-[15px] font-semibold tracking-[-0.01em] text-slate-950 sm:gap-4 sm:text-[16px]"
                   >
                     <span>{item.question}</span>
                     <span
@@ -78,13 +88,13 @@ export default function FaqSection() {
 
                   <div className={`faq-answer-shell ${isOpen ? "is-open" : ""}`}>
                     <div className="faq-answer-inner">
-                      <p className="max-w-[64rem] pr-12 pt-4 text-[14px] leading-[1.7] text-slate-600">{item.answer}</p>
+                      <p className="max-w-[64rem] pt-4 pr-2 text-[14px] leading-[1.7] text-slate-600 sm:pr-12">{item.answer}</p>
                     </div>
                   </div>
                 </div>
 
                 {index !== FAQ_ITEMS.length - 1 ? (
-                  <div className="px-6 sm:px-7 h-[4px]" aria-hidden="true">
+                  <div className="h-[4px] px-4 sm:px-7" aria-hidden="true">
                     <div className="h-[2px] w-full bg-[rgba(0,0,0,0.22)]" />
                     <div className="h-[2px] w-full bg-[rgba(100,116,139,0.22)]" />
                   </div>

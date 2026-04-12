@@ -260,7 +260,6 @@ function PricingCardArtwork({ variant, title, description, price, badgeColor, ba
             style={{
               marginTop: "auto",
               width: "100%",
-              maxWidth: "24rem",
               color: "#06202b",
             }}
           >
@@ -362,7 +361,7 @@ export default function PricingSection() {
         .pricing-section {
           display: flex;
           justify-content: center;
-          padding: 7rem 1.5rem;
+          padding: 4.75rem 1rem;
           background: #ffffff;
         }
 
@@ -371,14 +370,14 @@ export default function PricingSection() {
         }
 
         .pricing-header {
-          margin-bottom: 2.5rem;
+          margin-bottom: 2rem;
           text-align: center;
         }
 
         .pricing-header h2 {
           margin: 0;
           color: rgb(2 6 23);
-          font-size: 34px;
+          font-size: 30px;
           font-weight: 600;
           line-height: 1.08;
           letter-spacing: -0.03em;
@@ -395,15 +394,17 @@ export default function PricingSection() {
         .pricing-grid {
           display: flex;
           justify-content: center;
-          width: 60%;
+          width: 100%;
+          max-width: 1000px;
           margin: 0 auto;
-          gap: 1.5rem;
-          flex-wrap: nowrap;
+          gap: 1rem;
+          flex-wrap: wrap;
         }
 
         @media (max-width: 640px) {
-          .pricing-section {
-            padding: 5.5rem 1rem;
+          .pricing-card {
+            width: 100% !important;
+            height: 320px !important;
           }
 
           .pricing-header {
@@ -412,13 +413,26 @@ export default function PricingSection() {
 
           .pricing-grid {
             width: 100%;
-            flex-wrap: wrap;
+            gap: 1.25rem;
           }
         }
 
         @media (min-width: 640px) {
+          .pricing-section {
+            padding: 7rem 1.5rem;
+          }
+
+          .pricing-header {
+            margin-bottom: 2.5rem;
+          }
+
           .pricing-header h2 {
             font-size: 42px;
+          }
+
+          .pricing-grid {
+            gap: 1.5rem;
+            flex-wrap: nowrap;
           }
         }
       `}</style>
