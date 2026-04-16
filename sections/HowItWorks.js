@@ -44,21 +44,25 @@ function StepCard({ step, isActive, onClick }) {
       onClick={onClick}
       className={`group flex w-full items-center gap-4 rounded-[14px] border px-5 py-3.5 text-left transition-all duration-300 ${
         isActive
-          ? "border-slate-200 bg-white text-slate-950 shadow-[0_18px_60px_rgba(15,23,42,0.08)]"
-          : "border-slate-200 bg-slate-50 text-slate-900 hover:border-slate-300 hover:bg-slate-100"
+          ? "text-white shadow-none"
+          : "border-slate-300 bg-slate-200 text-slate-900 hover:border-slate-400 hover:bg-slate-300"
       }`}
+      style={{
+        backgroundColor: isActive ? "#027783" : "#f8fafc",
+        borderColor: isActive ? "#027783" : "#e5e7eb",
+      }}
       aria-pressed={isActive}
     >
       <span
-        className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border text-[14px] font-semibold tracking-[0.08em] ${
-          isActive ? "border-slate-200 bg-slate-100 text-slate-900" : "border-slate-200 bg-white text-slate-700"
+        className={`shrink-0 text-[14px] font-semibold tracking-[0.08em] ${
+          isActive ? "text-white" : "text-slate-700"
         }`}
       >
         {step.stepNumber}
       </span>
 
       <span className="min-w-0 flex-1">
-        <span className={`block text-[18px] font-semibold tracking-[0.01em] ${isActive ? "text-slate-950" : "text-slate-900"}`}>
+        <span className={`block text-[18px] font-semibold tracking-[0.01em] ${isActive ? "text-white" : "text-slate-900"}`}>
           {step.title}
         </span>
       </span>
@@ -66,7 +70,7 @@ function StepCard({ step, isActive, onClick }) {
       <span
         className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-transform duration-300 ${
           isActive
-            ? "border-slate-200 bg-slate-100 text-slate-900"
+            ? "border-white bg-white text-brand"
             : "border-slate-200 bg-white text-slate-500 group-hover:translate-x-0.5"
         }`}
       >
@@ -86,27 +90,35 @@ export default function HowItWorks() {
   return (
     <section className="flex justify-center bg-white px-4 py-16 text-slate-950 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
       <div className="mx-auto grid w-full max-w-[1320px] grid-cols-1 gap-8 lg:grid-cols-[1fr_2fr] lg:gap-12">
-        <div className="flex flex-col justify-between">
+        <div className="flex flex-col gap-6 lg:justify-between lg:gap-0">
           <div className="max-w-xl">
             <h2 className="text-[30px] font-semibold leading-[1.08] tracking-[-0.03em] text-slate-950 sm:text-[42px]">
               Como Funciona
             </h2>
-            <p className="mt-5 text-[14px] font-bold text-slate-950 sm:mt-8">
+            <p className="mt-6 text-[14px] font-bold text-slate-950 sm:mt-6">
               {activeStep.title}
             </p>
-            <p className="mt-2 max-w-xl text-[14px] leading-relaxed text-slate-600">
+            <p className="mt-1 max-w-xl text-[14px] leading-relaxed text-slate-600 sm:mt-2">
               {activeStep.description}
             </p>
           </div>
 
-          <div className="mt-6 flex flex-col gap-3 sm:mt-8">
+          <div className="relative flex flex-col lg:hidden">
+            <div
+              key={`${activeStep.id}-mobile`}
+              className="relative aspect-[4/3] overflow-hidden rounded-[16px] bg-cover bg-center transition-all duration-500 ease-out motion-safe:animate-[fade-in_500ms_ease-out]"
+              style={{ backgroundImage: `url("${activeStep.image}")` }}
+            />
+          </div>
+
+          <div className="flex flex-col gap-3 pt-1 sm:mt-8">
             {STEPS.map((step) => (
               <StepCard key={step.id} step={step} isActive={step.id === activeStep.id} onClick={() => setActiveStepId(step.id)} />
             ))}
           </div>
         </div>
 
-        <div className="relative flex flex-col">
+        <div className="relative hidden flex-col lg:flex">
           <div
             key={activeStep.id}
             className="relative aspect-[4/3] overflow-hidden rounded-[16px] bg-cover bg-center transition-all duration-500 ease-out motion-safe:animate-[fade-in_500ms_ease-out] lg:aspect-[16/9]"
