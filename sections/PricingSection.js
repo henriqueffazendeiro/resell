@@ -2,6 +2,18 @@
 
 import { useEffect, useRef, useState } from "react";
 
+const TESTED_PRODUCTS_TOP = [
+  { name: "Golden Goose", src: "/teste.jpg", investment: "35.00€", sale: "135.00€", profit: "+100.00€" },
+  { name: "Casaco Burberry", src: "/teste.jpg", investment: "45.00€", sale: "100.00€", profit: "+55.00€" },
+  { name: "Cachecol Burberry", src: "/teste.jpg", investment: "28.00€", sale: "90.00€", profit: "+62.00€" },
+];
+
+const TESTED_PRODUCTS_BOTTOM = [
+  { name: "Mala Jacquemus", src: "/teste.jpg", investment: "39.00€", sale: "85.00€", profit: "+46.00€" },
+  { name: "Anel Pandora", src: "/teste.jpg", investment: "11.00€", sale: "30.00€", profit: "+19.00€" },
+  { name: "Produto Premium", src: "/teste.jpg", investment: "33.00€", sale: "100.00€", profit: "+67.00€" },
+];
+
 function PricingCardArtwork({ variant, title, description, price, badgeColor, badgeTitle, badgeValue }) {
   const containerRef = useRef(null);
   const [cardWidth, setCardWidth] = useState(560);
@@ -355,6 +367,78 @@ export default function PricingSection() {
             badgeValue="50% OFF"
           />
         </div>
+
+        <div className="community-wins">
+          <header className="community-wins-header">
+            <div className="community-wins-title">
+              <h2>Produtos testados</h2>
+              <img src="/vinted-icon.png" alt="Vinted" className="community-wins-icon" />
+            </div>
+            <p>Produtos validados para te ajudar a avancar com mais confianca e mais velocidade.</p>
+          </header>
+
+          <div className="product-marquee-shell">
+            <div className="product-marquee fade-mask">
+              <div className="product-track product-track-top">
+                {[...TESTED_PRODUCTS_TOP, ...TESTED_PRODUCTS_TOP].map((item, index) => (
+                  <article key={`${item.name}-top-${index}`} className="product-card">
+                    <div className="product-card-image" role="img" aria-label={item.name} style={{ backgroundImage: `url("${item.src}")` }} />
+                    <div className="product-card-body">
+                      <div className="product-card-panel">
+                        <p className="product-card-title">{item.name}</p>
+                        <div className="product-metrics">
+                          <div className="product-metric product-metric-investment">
+                            <span>Investimento</span>
+                            <strong>{item.investment}</strong>
+                          </div>
+                          <div className="product-metric">
+                            <span>Valor de venda</span>
+                            <strong>{item.sale}</strong>
+                          </div>
+                          <div className="product-metric product-metric-profit">
+                            <span>Profit</span>
+                            <strong>{item.profit}</strong>
+                          </div>
+                        </div>
+                        <div className="product-sold-badge">Vendido</div>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+
+            <div className="product-marquee fade-mask">
+              <div className="product-track product-track-bottom">
+                {[...TESTED_PRODUCTS_BOTTOM, ...TESTED_PRODUCTS_BOTTOM].map((item, index) => (
+                  <article key={`${item.name}-bottom-${index}`} className="product-card">
+                    <div className="product-card-image" role="img" aria-label={item.name} style={{ backgroundImage: `url("${item.src}")` }} />
+                    <div className="product-card-body">
+                      <div className="product-card-panel">
+                        <p className="product-card-title">{item.name}</p>
+                        <div className="product-metrics">
+                          <div className="product-metric product-metric-investment">
+                            <span>Investimento</span>
+                            <strong>{item.investment}</strong>
+                          </div>
+                          <div className="product-metric">
+                            <span>Valor de venda</span>
+                            <strong>{item.sale}</strong>
+                          </div>
+                          <div className="product-metric product-metric-profit">
+                            <span>Profit</span>
+                            <strong>{item.profit}</strong>
+                          </div>
+                        </div>
+                        <div className="product-sold-badge">Vendido</div>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <style jsx>{`
@@ -401,6 +485,201 @@ export default function PricingSection() {
           flex-wrap: wrap;
         }
 
+        .community-wins {
+          width: 100%;
+          max-width: 1100px;
+          margin: 4rem auto 0;
+        }
+
+        .community-wins-header {
+          margin: 0 auto 2rem;
+          text-align: center;
+        }
+
+        .community-wins-title {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.75rem;
+        }
+
+        .community-wins-header h2 {
+          margin: 0;
+          color: rgb(2 6 23);
+          font-size: 30px;
+          font-weight: 600;
+          line-height: 1.08;
+          letter-spacing: -0.03em;
+        }
+
+        .community-wins-icon {
+          width: 34px;
+          height: 34px;
+          object-fit: contain;
+          flex: 0 0 auto;
+        }
+
+        .community-wins-header p {
+          margin: 0.85rem auto 0;
+          max-width: 34rem;
+          color: rgba(15, 23, 42, 0.7);
+          font-size: 14px;
+          line-height: 1.6;
+        }
+
+        .product-marquee-shell {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .product-marquee {
+          overflow: hidden;
+          width: 100%;
+        }
+
+        .fade-mask {
+          mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+          -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+
+        .product-track {
+          display: flex;
+          width: max-content;
+          gap: 1rem;
+        }
+
+        .product-track-top {
+          animation: marquee-left-to-right 24s linear infinite;
+        }
+
+        .product-track-bottom {
+          animation: marquee-right-to-left 24s linear infinite;
+        }
+
+        .product-card {
+          position: relative;
+          flex: 0 0 290px;
+          min-height: 370px;
+          overflow: hidden;
+          border-radius: 20px;
+          border: 1px solid rgba(226, 232, 240, 0.9);
+          background: #dbe7ea;
+        }
+
+        .product-card-image {
+          position: absolute;
+          inset: 0;
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+        }
+
+        .product-card-body {
+          position: absolute;
+          inset: 0;
+          z-index: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+        }
+
+        .product-card-panel {
+          position: relative;
+          overflow: hidden;
+          padding: 1rem 1rem 0;
+          background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.12));
+          border-top: 1px solid rgba(255, 255, 255, 0.26);
+          backdrop-filter: blur(18px) saturate(180%);
+          -webkit-backdrop-filter: blur(18px) saturate(180%);
+        }
+
+        .product-card-title {
+          margin: 0 0 0.85rem;
+          color: #ffffff;
+          font-size: 15px;
+          font-weight: 700;
+          line-height: 1.3;
+        }
+
+        .product-metrics {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+
+        .product-metric {
+          display: flex;
+          align-items: baseline;
+          justify-content: space-between;
+          gap: 0.75rem;
+          padding-bottom: 0.45rem;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+        }
+
+        .product-metric span {
+          color: rgba(255, 255, 255, 0.76);
+          font-size: 12px;
+          font-weight: 600;
+          line-height: 1.4;
+        }
+
+        .product-metric strong {
+          color: #ffffff;
+          font-size: 14px;
+          font-weight: 700;
+          line-height: 1.2;
+          letter-spacing: -0.01em;
+        }
+
+        .product-metric:last-child {
+          padding-bottom: 0;
+          border-bottom: 0;
+        }
+
+        .product-metric-profit strong {
+          color: #d4fff6;
+        }
+
+        .product-metric-investment strong {
+          color: #f3a3a3;
+        }
+
+        .product-sold-badge {
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          margin-right: -1rem;
+          margin-left: -1rem;
+          padding: 0.6rem 1rem;
+          background: #2bb673;
+          color: #ffffff;
+          font-size: 12px;
+          font-weight: 700;
+          letter-spacing: 0.01em;
+        }
+
+        @keyframes marquee-left-to-right {
+          from {
+            transform: translateX(-50%);
+          }
+
+          to {
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes marquee-right-to-left {
+          from {
+            transform: translateX(0);
+          }
+
+          to {
+            transform: translateX(-50%);
+          }
+        }
+
         @media (max-width: 640px) {
           .pricing-card {
             width: 100% !important;
@@ -414,6 +693,35 @@ export default function PricingSection() {
           .pricing-grid {
             width: 100%;
             gap: 1.25rem;
+          }
+
+          .product-card {
+            flex-basis: 250px;
+            min-height: 330px;
+          }
+
+          .product-card-body {
+          }
+
+          .product-card-panel {
+            padding: 0.85rem 0.85rem 0;
+          }
+
+          .product-sold-badge {
+            margin-right: -0.85rem;
+            margin-left: -0.85rem;
+          }
+
+          .product-metrics {
+            gap: 0.45rem;
+          }
+
+          .product-metric {
+            padding-bottom: 0.4rem;
+          }
+
+          .product-metric strong {
+            font-size: 12px;
           }
         }
 
@@ -433,6 +741,27 @@ export default function PricingSection() {
           .pricing-grid {
             gap: 1.5rem;
             flex-wrap: nowrap;
+          }
+
+          .community-wins-header h2 {
+            font-size: 42px;
+          }
+
+          .community-wins-icon {
+            width: 42px;
+            height: 42px;
+          }
+        }
+
+        @media (min-width: 640px) and (max-width: 1023px) {
+          .community-wins {
+            margin-top: 5rem;
+          }
+        }
+
+        @media (min-width: 1024px) {
+          .community-wins {
+            margin-top: 7rem;
           }
         }
       `}</style>
