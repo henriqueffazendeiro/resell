@@ -64,11 +64,19 @@ select {
 button {
   background: transparent;
   border: 0;
+  cursor: pointer;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+  cursor: pointer;
+}
+
+[role="button"],
+summary,
+label[for] {
+  cursor: pointer;
 }
 
 .header-blur-layer {

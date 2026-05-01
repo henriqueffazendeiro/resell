@@ -60,13 +60,13 @@ export default function FaqSection() {
         </p>
         </header>
 
-        <div className="w-full overflow-hidden rounded-[18px] border border-slate-200 bg-white text-left shadow-[0_1px_0_rgba(15,23,42,0.02)]">
+        <div className="w-full text-left">
           {FAQ_ITEMS.map((item, index) => {
             const isOpen = openQuestion === item.question;
 
             return (
               <div key={item.question} className="w-full">
-                <div className="w-full px-4 py-4 sm:px-7 sm:py-5">
+                <div className="w-full py-4 sm:py-5">
                   <button
                     type="button"
                     onClick={() => toggleQuestion(item.question)}
@@ -75,8 +75,8 @@ export default function FaqSection() {
                   >
                     <span>{item.question}</span>
                     <span
-                      className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition ${
-                        isOpen ? "rotate-45 bg-brand text-white" : "bg-slate-100 text-slate-500"
+                      className={`flex h-9 w-9 shrink-0 items-center justify-center transition ${
+                        isOpen ? "rotate-45 text-brand" : "text-slate-500"
                       }`}
                     >
                       <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -94,9 +94,9 @@ export default function FaqSection() {
                 </div>
 
                 {index !== FAQ_ITEMS.length - 1 ? (
-                  <div className="h-[4px] px-4 sm:px-7" aria-hidden="true">
-                    <div className="h-[2px] w-full bg-[rgba(0,0,0,0.22)]" />
-                    <div className="h-[2px] w-full bg-[rgba(100,116,139,0.22)]" />
+                  <div className="h-[4px]" aria-hidden="true">
+                    <div className="mx-auto h-[2px] w-[calc(100%-6px)] rounded-full bg-[rgba(100,116,139,0.14)]" />
+                    <div className="mx-auto h-[2px] w-[calc(100%-6px)] rounded-full bg-[rgba(0,0,0,0.16)]" />
                   </div>
                 ) : null}
               </div>

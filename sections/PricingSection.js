@@ -295,18 +295,22 @@ function PricingCardArtwork({ variant, title, description, price, badgeColor, ba
             >
               <div
                 style={{
-                  width: "100%",
+                  width: "calc(100% - 6px)",
                   height: "2px",
                   display: "block",
-                  backgroundColor: "rgba(0, 0, 0, 0.22)",
+                  margin: "0 auto",
+                  borderRadius: "999px",
+                  backgroundColor: "rgba(100, 116, 139, 0.14)",
                 }}
               />
               <div
                 style={{
-                  width: "100%",
+                  width: "calc(100% - 6px)",
                   height: "2px",
                   display: "block",
-                  backgroundColor: "rgba(100, 116, 139, 0.22)",
+                  margin: "0 auto",
+                  borderRadius: "999px",
+                  backgroundColor: "rgba(0, 0, 0, 0.16)",
                 }}
               />
             </div>
@@ -366,6 +370,19 @@ export default function PricingSection() {
             badgeTitle="Aproveita o Desconto!"
             badgeValue="50% OFF"
           />
+        </div>
+
+        <div className="pricing-divider" aria-hidden="true">
+          <div className="pricing-divider-line pricing-divider-line-light" />
+          <div className="pricing-divider-line pricing-divider-line-dark" />
+        </div>
+
+        <div className="payment-methods" aria-label="Métodos de pagamento">
+          <img src="/Mbway-Logo-Vector.svg--300x146.png" alt="MB Way" className="payment-method-logo payment-method-logo-mbway" />
+          <img src="/visa-svgrepo-com.svg" alt="Visa" className="payment-method-logo payment-method-logo-visa" />
+          <img src="/mastercard-svgrepo-com.svg" alt="Mastercard" className="payment-method-logo payment-method-logo-mastercard" />
+          <img src="/apple-pay-svgrepo-com.svg" alt="Apple Pay" className="payment-method-logo payment-method-logo-apple" />
+          <img src="/google-pay-primary-logo-logo-svgrepo-com.svg" alt="Google Pay" className="payment-method-logo payment-method-logo-google" />
         </div>
 
         <div className="community-wins">
@@ -483,6 +500,55 @@ export default function PricingSection() {
           margin: 0 auto;
           gap: 1rem;
           flex-wrap: wrap;
+        }
+
+        .pricing-divider {
+          width: 100%;
+          max-width: 1000px;
+          margin: 2.5rem auto 0;
+          height: 4px;
+        }
+
+        .pricing-divider-line {
+          width: calc(100% - 6px);
+          height: 2px;
+          display: block;
+          margin: 0 auto;
+          border-radius: 999px;
+        }
+
+        .pricing-divider-line-dark {
+          background: rgba(0, 0, 0, 0.16);
+        }
+
+        .pricing-divider-line-light {
+          background: rgba(100, 116, 139, 0.14);
+        }
+
+        .payment-methods {
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          gap: 0.85rem;
+          width: 100%;
+          max-width: 1000px;
+          margin: 1rem 0 0;
+          margin-left: auto;
+          margin-right: auto;
+          flex-wrap: wrap;
+        }
+
+        .payment-method-logo {
+          display: block;
+          width: 48px;
+          height: 34px;
+          padding: 0.3rem;
+          border: 1px solid rgba(226, 232, 240, 0.95);
+          border-radius: 8px;
+          background: #ffffff;
+          object-fit: contain;
+          filter: grayscale(0);
+          box-sizing: border-box;
         }
 
         .community-wins {
@@ -695,6 +761,15 @@ export default function PricingSection() {
             gap: 1.25rem;
           }
 
+          .pricing-divider {
+            margin-top: 2rem;
+          }
+
+          .payment-methods {
+            margin-top: 0.85rem;
+            gap: 0.65rem;
+          }
+
           .product-card {
             flex-basis: 250px;
             min-height: 330px;
@@ -741,6 +816,14 @@ export default function PricingSection() {
           .pricing-grid {
             gap: 1.5rem;
             flex-wrap: nowrap;
+          }
+
+          .pricing-divider {
+            margin-top: 3rem;
+          }
+
+          .payment-methods {
+            margin-top: 1rem;
           }
 
           .community-wins-header h2 {
